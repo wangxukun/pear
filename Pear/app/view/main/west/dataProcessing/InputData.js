@@ -107,7 +107,7 @@ Ext.define('Pear.view.main.west.dataProcessing.InputData', {
 		        id: 'balance',
 		        header: '余额',
 		        width: 100,
-		        dataIndex: 'balance',
+		        dataIndex: 'balance'
 		       /* summaryType: function(records, values) {
 		            var i = 0,
 		                length = records.length,

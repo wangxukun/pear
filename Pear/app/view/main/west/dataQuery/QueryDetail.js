@@ -9,11 +9,12 @@ Ext.define('Pear.view.main.west.dataQuery.QueryDetail', {
 		'Ext.ux.TreePicker', 
 		'Ext.layout.container.HBox',
         'Ext.layout.container.VBox',
-		'Pear.store.AccountTreeStore',
-	    'Ext.data.*',
+        'Ext.data.*',
 	    'Ext.form.field.Number',
 	    'Ext.form.field.Date',
-	    'Pear.store.AccountDetail'
+		'Pear.store.AccountTreeStore',
+	    'Pear.store.AccountDetail',
+	    'Pear.controller.main.west.dataQuery.QueryDetail'
 	],
 
 	xtype : 'queryDetail',
@@ -22,7 +23,7 @@ Ext.define('Pear.view.main.west.dataQuery.QueryDetail', {
         type: 'vbox',
         align: 'stretch'
     },
-    
+    controller: 'queryDetail',
     width: '100%',
 	height : 840,
 	padding : 20,
@@ -71,8 +72,8 @@ Ext.define('Pear.view.main.west.dataQuery.QueryDetail', {
         	    }, '->', {
         	        xtype: 'button',
         	        text: '打印',
-        	        scope: this,
-        	        handler: this.onPrintClick
+   //     	        scope: this,
+        	        handler: 'onPrintClick'
         	    }, {
         	        xtype: 'button',
         	        text: '导出'
@@ -126,12 +127,12 @@ Ext.define('Pear.view.main.west.dataQuery.QueryDetail', {
     },
     
     //查询并显示子账户明细
-    showAccountDetail: function(){
+    showAccountDetail: function(accountId,startDate,endDate){
         var grid = this.down('grid');
         
         Ext.suspendLayouts();
-        grid.setTitle('某某村委会或某某小组');
-        grid.reconfigure(this.createDetailAccountStore(), [{
+ //        grid.setTitle('某某村委会或某某小组');
+        grid.reconfigure(this.createDetailAccountStore(accountId,startDate,endDate), [{
             header: '日期',
             width: 136,
             sortable: true,
@@ -222,43 +223,37 @@ Ext.define('Pear.view.main.west.dataQuery.QueryDetail', {
         	width: 80,
         	dataIndex: 'direction',
         	renderer: function(value){
-        		return value;
+        		if(value == 0){
+        			return "借";
+        		}else{
+        			return "<div style='color:red'>贷</div>";
+        		}
         	}
         },{
-            id: 'cost',
+            id: 'balance',
             header: '余额',
             width: 180,
             sortable: false,
             groupable: false,
             renderer: function(value, metaData, record, rowIdx, colIdx, store, view) {
-            	if(rowIdx == 0){
-            		return Ext.util.Format.number(record.get('jie') - record.get('dai'),"0,000.00"); 
-            	}else{
-            		return Ext.util.Format.number(record.get('jie') * record.get('dai'),"0,000.00");
-            	}
+            	return value;
                 
             },
-            dataIndex: 'balance',
-            /*summaryType: function(records, values) {
-                var i = 0,
-                    length = records.length,
-                    total = 0,
-                    record;
-
-                for (; i < length; ++i) {
-                    record = records[i];
-                    total += record.get('jie') * record.get('dai');
-                }
-                return total;
-            },
-            summaryRenderer: Ext.util.Format.usMoney
-            */
+            dataIndex: 'balance'
         }]);
         Ext.resumeLayouts(true);  
     },
     
-    createDetailAccountStore: function(){
-        return Ext.create('Pear.store.AccountDetail');
+    createDetailAccountStore: function(accountId,startDate,endDate){
+        return Ext.create('Pear.store.AccountDetail',{
+        	proxy: {
+				extraParams:{
+					accountId:accountId,
+					startDate: startDate,
+					endDate:endDate
+				}
+			}
+        });
     },
     
     onShowAccountDetailClick: function(){
@@ -267,7 +262,10 @@ Ext.define('Pear.view.main.west.dataQuery.QueryDetail', {
     	var accountStartDate = toolbar.getComponent('startDate');
     	var accountEndDate = toolbar.getComponent('endDate');
     	console.info("账户ID："+accountTree.getValue()+"，开始日期："+accountStartDate.getValue()+"，结束日期："+accountEndDate.getValue());
+    	var accountId = accountTree.getValue();
+    	var startDate = accountStartDate.getValue();
+    	var endDate = accountEndDate.getValue();
     	
-    	this.showAccountDetail();
+    	this.showAccountDetail(accountId,startDate,endDate);
     }
 });

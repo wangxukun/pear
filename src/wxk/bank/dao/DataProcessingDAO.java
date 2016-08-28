@@ -25,4 +25,31 @@ public interface DataProcessingDAO {
 	 * @throws SQLException
 	 */
 	public List<Accrual> getAccrualsByAccountId(int accountid,Date start,Date end) throws SQLException;
+	
+	/**
+	 * 取得特定账户初始化金额
+	 * @param accountid
+	 * @param end	如果查询的日期在end之前，说明查询的时间段，账户还未初始化
+	 * @return
+	 * @throws SQLException
+	 */
+	public String getInitAmount(int accountid,Date end) throws SQLException;
+	
+	/**
+	 * 取得指定账户，特定日期前发生额的借方合计
+	 * @param accountid
+	 * @param before
+	 * @return
+	 * @throws SQLException
+	 */
+	public String getJieSum(int accountid,Date before) throws SQLException;
+	
+	/**
+	 * 取得指定账户，特定日期前发生额的贷方合计
+	 * @param accountid
+	 * @param before
+	 * @return
+	 * @throws SQLException
+	 */
+	public String getDaiSum(int accountid,Date before) throws SQLException;
 }

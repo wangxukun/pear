@@ -1,5 +1,6 @@
 package wxk.bank.dao.impl;
 
+import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -65,6 +66,54 @@ public class DataProcessingDAOImpl implements DataProcessingDAO {
 			accruals.add(accrual);
 		}
 		return accruals;
+	}
+
+	@Override
+	public String getInitAmount(int accountid,Date end) throws SQLException {
+		String amount = null;
+		String sql = "select amount,direction from initaccount where accountid=? and initdate <= ?";
+		List<Object> params = new ArrayList<Object>();
+		params.add(accountid);
+		params.add(end);
+		Map<String,Object> map = this.jdbc.findSingleByPreparedStatement(sql, params);
+		if(!map.isEmpty()){
+			amount = map.get("amount").toString();
+			int d = Integer.parseInt(map.get("direction").toString());
+			if(d != 0){
+				BigDecimal a = new BigDecimal(amount);
+				//取相反数
+				amount = a.negate().toString();
+			}
+		}
+		return amount;
+	}
+
+	@Override
+	public String getJieSum(int accountid, Date before) throws SQLException {
+		String amount = null;
+		String sql = "select sum(amount) as jie from accrual where groupid=? and direction=0 and occurdate<?";
+		List<Object> params = new ArrayList<Object>();
+		params.add(accountid);
+		params.add(before);
+		Map<String,Object> map = this.jdbc.findSingleByPreparedStatement(sql, params);
+		if(!map.isEmpty()){
+			amount = map.get("jie").toString();
+		}
+		return amount;
+	}
+
+	@Override
+	public String getDaiSum(int accountid, Date before) throws SQLException {
+		String amount = null;
+		String sql = "select sum(amount) as dai from accrual where groupid=? and direction=1 and occurdate<?";
+		List<Object> params = new ArrayList<Object>();
+		params.add(accountid);
+		params.add(before);
+		Map<String,Object> map = this.jdbc.findSingleByPreparedStatement(sql, params);
+		if(!map.isEmpty()){
+			amount = map.get("dai").toString();
+		}
+		return amount;
 	}
 
 }

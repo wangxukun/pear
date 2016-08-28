@@ -1,5 +1,6 @@
 package wxk.bank.servlet.dataprocessing;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.DateFormat;
@@ -14,58 +15,56 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import net.sf.json.JSONObject;
 import wxk.bank.json.factory.JsonFactory;
 
 /**
- * Servlet implementation class JsonAccountDetail
+ * Servlet implementation class XMLAccountDetail
  */
-@WebServlet("/JsonAccountDetail")
-public class JsonAccountDetail extends HttpServlet {
+@WebServlet(description = "打印账簿用XML", urlPatterns = { "/XMLAccountDetail" })
+public class XMLAccountDetail extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public JsonAccountDetail() {
+    public XMLAccountDetail() {
         super();
+        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("application/x-json");
+		response.setContentType("text/xml");
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
 		PrintWriter out = response.getWriter();
+		ByteArrayOutputStream xml = null;
 		
-		int accountId = Integer.parseInt(request.getParameter("accountId"));
-		String startDate = request.getParameter("startDate");
-		String endDate = request.getParameter("endDate");
-		JSONObject jo = null;
-		
-		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss",Locale.CHINESE);
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd",Locale.CHINESE);
 		Date start = null;
 		try {
-			start = dateFormat.parse(startDate);
+			start = dateFormat.parse("2014-01-01");
 		} catch (ParseException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		Date end = null;
 		try {
-			end = dateFormat.parse(endDate);
+			end = dateFormat.parse("2014-12-31");
 		} catch (ParseException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		jo = JsonFactory.getJsonDataProcessInstance().getAccountDetail(accountId, start, end);
-		System.out.println(accountId);
-		System.out.println(startDate);
-		System.out.println(endDate);
-		System.out.println(jo.toString());
-		out.print(jo);
+		try {
+			xml = JsonFactory.getJsonDataProcessInstance().getAccountDetailXML(21, start, end);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		out.print(xml);
 		out.flush();
 		out.close();
 	}

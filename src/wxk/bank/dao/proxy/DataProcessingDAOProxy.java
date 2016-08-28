@@ -44,5 +44,44 @@ public class DataProcessingDAOProxy implements DataProcessingDAO {
 		}
 		return accruals;
 	}
+	@Override
+	public String getInitAmount(int accountid, Date end) throws SQLException {
+		String amount = null;
+		try {
+			this.jdbc.getConnection();
+			amount = this.dao.getInitAmount(accountid, end);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			this.jdbc.releaseConnection();
+		}
+		return amount;
+	}
+	@Override
+	public String getJieSum(int accountid, Date before) throws SQLException {
+		String amount = null;
+		try {
+			this.jdbc.getConnection();
+			amount = this.dao.getJieSum(accountid, before);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			this.jdbc.releaseConnection();
+		}
+		return amount;
+	}
+	@Override
+	public String getDaiSum(int accountid, Date before) throws SQLException {
+		String amount = null;
+		try {
+			this.jdbc.getConnection();
+			amount = this.dao.getDaiSum(accountid, before);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			this.jdbc.releaseConnection();
+		}
+		return amount;
+	}
 
 }
