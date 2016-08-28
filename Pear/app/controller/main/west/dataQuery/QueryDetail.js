@@ -45,13 +45,13 @@ Ext.define('Pear.controller.main.west.dataQuery.QueryDetail', {
     		LODOP.SET_SHOW_MODE("LANDSCAPE_DEFROTATED",1);
     		LODOP.SET_PRINT_STYLE("FontSize",18);
     		LODOP.SET_PRINT_STYLE("Bold",1);
-    		LODOP.ADD_PRINT_TEXT(20,460,500,39,"银行存款日记账");
-    		LODOP.SET_PRINT_STYLE("FontSize",10);
-    		LODOP.ADD_PRINT_TEXT(80,80,500,20,"单位:水阁村委会");
-    		LODOP.ADD_PRINT_TEXT(80,500,500,20,"年度：2014年");
-    		LODOP.ADD_PRINT_TEXT(80,960,500,20,"货币单位:元");
+ //   		LODOP.ADD_PRINT_TEXT(20,460,500,39,"银行存款日记账");
+ //   		LODOP.SET_PRINT_STYLE("FontSize",10);
+ //   		LODOP.ADD_PRINT_TEXT(80,80,500,20,"单位:水阁村委会");
+ //   		LODOP.ADD_PRINT_TEXT(80,500,500,20,"年度：2014年");
+ //   		LODOP.ADD_PRINT_TEXT(80,960,500,20,"货币单位:元");
     		LODOP.SET_PRINT_STYLE("FontSize",18);
-    		LODOP.ADD_PRINT_TBURL(100,60,"100%","100%","HTMLAccountDetail");
+    		LODOP.ADD_PRINT_TBURL(20,60,"100%","100%","HTMLAccountDetail");
     		LODOP.PREVIEW();
     	}
     }

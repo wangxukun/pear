@@ -41,7 +41,7 @@ public class HTMLAccountDetail extends HttpServlet {
 		out.println("border-collapse:collapse;");
 		out.println("width:1000px;");
 		out.println("}");
-		out.println("table,tr,th,td{");
+		out.println("tr,th,td{");
 		out.println("border:1px solid black;");
 		out.println("}");
 		out.println("th{");
@@ -53,6 +53,9 @@ public class HTMLAccountDetail extends HttpServlet {
 		out.println("td{");
 		out.println("text-indent:10px;");
 		out.println("}");
+		out.println(".noBorder{");
+		out.println("border-style: none;");
+		out.println("}");
 		out.println("</style>");
 		
 		out.println("</head>");
@@ -60,12 +63,16 @@ public class HTMLAccountDetail extends HttpServlet {
 		out.println("<xml id='account' src='XMLAccountDetail'></xml>");
 		out.println("<table datasrc='#account'>");
 		out.println("<thead>");
+		out.println("<tr class='noBorder'><th class='noBorder' colspan='7'>银行存款日记账</th></tr>");
+		out.println("<tr class='noBorder'>");
+		out.println("<th class='noBorder' colspan='2'>单位：水阁村委会</th><th class='noBorder' colspan='3'>年度：2014年</th><th class='noBorder' colspan='2'>货币计量单位：元</th>");
+		out.println("</tr>");
 		out.println("<tr>");
 		out.println("<th>日期</th><th style='width:\"50px\"'>编号</th><th>摘要</th><th style='width:\"120px\"'>借方</th><th style='width:\"120px\"'>贷方</th><th style='width:\"50px\"'>方向</th><th style='width:\"120px\"'>余额</th>");
 		out.println("</tr>");
 		out.println("</thead>");
 		out.println("<tfoot>");
-		out.println("<tr><th colspan='7'>合并单元格</th></tr>");
+		out.println("<th class='noBorder' colspan='2'>出纳：王旭昆</th><th class='noBorder' colspan='3'>共5页</th><th class='noBorder' colspan='2'>第1页</th>");
 		out.println("</tfoot>");
 		out.println("<tbody>");
 		out.println("<tr>");
