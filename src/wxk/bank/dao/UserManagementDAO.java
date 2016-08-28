@@ -52,4 +52,7 @@ public interface UserManagementDAO {
 	 * @throws SQLException
 	 */
 	boolean deleteUser(int userid) throws SQLException;
+	
+	
+	User findUserByUserid(int userid) throws SQLException;
 }

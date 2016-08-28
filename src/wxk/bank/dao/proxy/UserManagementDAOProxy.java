@@ -81,4 +81,19 @@ public class UserManagementDAOProxy implements UserManagementDAO {
 		}
 		return flag;
 	}
+	@Override
+	public User findUserByUserid(int userid) throws SQLException {
+		// TODO Auto-generated method stub
+		User user = null;
+		try {
+			this.jdbc.getConnection();
+			user = this.dao.findUserByUserid(userid);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		} finally{
+			this.jdbc.releaseConnection();
+		}
+		return user;
+	}
 }

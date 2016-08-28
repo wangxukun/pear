@@ -159,10 +159,10 @@ public class JsonDataProcessingImpl implements JsonDataProcessing {
 			BigDecimal big_balance = new BigDecimal(initBalance); //保存余额
 			int n = 0; //用于存储编号
 			int m = -1; //用于存储月份
-			BigDecimal subtotalJie = new BigDecimal("0");	//保存小计
-			BigDecimal subtotalDai = new BigDecimal("0");	//保存小计
-			BigDecimal totalJie = new BigDecimal("0");	//保存累计
-			BigDecimal totalDai = new BigDecimal("0");	//保存累计
+			BigDecimal subtotalJie = new BigDecimal("0.00");	//保存小计
+			BigDecimal subtotalDai = new BigDecimal("0.00");	//保存小计
+			BigDecimal totalJie = new BigDecimal("0.00");	//保存累计
+			BigDecimal totalDai = new BigDecimal("0.00");	//保存累计
 			while(iter.hasNext()){
 				Accrual temp = null;
 				temp = iter.next();

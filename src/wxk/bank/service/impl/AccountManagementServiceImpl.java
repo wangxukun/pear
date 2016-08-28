@@ -23,4 +23,11 @@ public class AccountManagementServiceImpl implements AccountManagementService {
 		return accounts;
 	}
 
+	@Override
+	public Account getAccountByAccountid(int accountid) throws SQLException {
+		Account account = null;
+		account = DAOFactory.getAccountManagementDAOInstance().getAccountByAccountid(accountid);
+		return account;
+	}
+
 }

@@ -20,4 +20,12 @@ public interface AccountManagementDAO {
 	 * @throws SQLException
 	 */
 	Set<Account> getAccounts() throws SQLException;
+	
+	/**
+	 * 取得指定ID的账户
+	 * @param accountid
+	 * @return
+	 * @throws SQLException
+	 */
+	Account getAccountByAccountid(int accountid) throws SQLException;
 }

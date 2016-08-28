@@ -61,6 +61,7 @@ public class JsonAccountDetail extends HttpServlet {
 			e1.printStackTrace();
 		}
 		jo = JsonFactory.getJsonDataProcessInstance().getAccountDetail(accountId, start, end);
+		System.out.println("--------JsonAccountDetail------");
 		System.out.println(accountId);
 		System.out.println(startDate);
 		System.out.println(endDate);

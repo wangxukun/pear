@@ -39,31 +39,39 @@ public class XMLAccountDetail extends HttpServlet {
 		response.setContentType("text/xml");
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
+		
+		
+		int accountid = Integer.parseInt(request.getParameter("accountid"));
+		String strStart = request.getParameter("start");
+		String strEnd = request.getParameter("end");
+		
+		System.out.println("-----XMLAccountDetail------");
+		System.out.println(strStart);
+		System.out.println(strEnd);
 		PrintWriter out = response.getWriter();
 		ByteArrayOutputStream xml = null;
 		
-		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd",Locale.CHINESE);
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd",Locale.CHINESE);
 		Date start = null;
 		try {
-			start = dateFormat.parse("2014-01-01");
+			start = dateFormat.parse(strStart);
 		} catch (ParseException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		Date end = null;
 		try {
-			end = dateFormat.parse("2014-12-31");
+			end = dateFormat.parse(strEnd);
 		} catch (ParseException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		try {
-			xml = JsonFactory.getJsonDataProcessInstance().getAccountDetailXML(21, start, end);
+			xml = JsonFactory.getJsonDataProcessInstance().getAccountDetailXML(accountid, start, end);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 		out.print(xml);
 		out.flush();
 		out.close();

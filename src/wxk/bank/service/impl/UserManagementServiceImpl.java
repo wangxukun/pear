@@ -40,4 +40,11 @@ public class UserManagementServiceImpl implements UserManagementService {
 		return flag;
 	}
 
+	@Override
+	public User find(int userid) throws SQLException {
+		User user = null;
+		user = DAOFactory.getUserManagementDAOInstance().findUserByUserid(userid);
+		return user;
+	}
+
 }

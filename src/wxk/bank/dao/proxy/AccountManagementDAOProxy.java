@@ -45,4 +45,18 @@ public class AccountManagementDAOProxy implements AccountManagementDAO {
 		return accounts;
 	}
 
+	@Override
+	public Account getAccountByAccountid(int accountid) throws SQLException {
+		Account account = null;
+		try {
+			this.jdbc.getConnection();
+			account = this.dao.getAccountByAccountid(accountid);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally{
+			this.jdbc.releaseConnection();
+		}
+		return account;
+	}
+
 }

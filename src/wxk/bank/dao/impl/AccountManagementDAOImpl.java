@@ -57,4 +57,23 @@ public class AccountManagementDAOImpl implements AccountManagementDAO {
 		return accounts;
 	}
 
+	@Override
+	public Account getAccountByAccountid(int accountid) throws SQLException {
+		Account account = new Account();
+		String sql = "select accountid,accountname,parentid,responsible,contactphone from account where accountid=?";
+		List<Object> params = new ArrayList<Object>();
+		params.add(accountid);
+		Map<String,Object> map = this.jdbc.findSingleByPreparedStatement(sql, params);
+		if(!map.isEmpty()){
+			account.setAccountid(accountid);
+			account.setAccountname(map.get("accountname").toString());
+			account.setContactphone(map.get("contactphone").toString());
+			account.setParentid(Integer.parseInt(map.get("parentid").toString()));
+			account.setResponsible(map.get("responsible").toString());
+		}else{
+			account = null;
+		}
+		return account;
+	}
+
 }

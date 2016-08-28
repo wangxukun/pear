@@ -107,5 +107,30 @@ public class UserManagementDAOImpl implements UserManagementDAO {
 		flag = this.jdbc.updateByPreparedStatement(sql, params);
 		return flag;
 	}
+	@Override
+	public User findUserByUserid(int userid) throws SQLException {
+		User user = new User();
+		String sql ="select userid,username,fullname,password,contactphone,email,organization,usertype,userstate,userscope,creationdate,updateddate from user where userid=?";
+		List<Object> params = new ArrayList<Object>();
+		params.add(userid);
+		Map<String,Object> map = this.jdbc.findSingleByPreparedStatement(sql, params);
+		if(!map.isEmpty()){
+			user.setUserid(Integer.parseInt(map.get("userid").toString()));
+			user.setUsername(map.get("username").toString());
+			user.setFullname(map.get("fullname").toString());
+			user.setPassword(map.get("password").toString());
+			user.setContactphone(map.get("contactphone").toString());
+			user.setEmail(map.get("email").toString());
+			user.setOrganization(map.get("organization").toString());
+			user.setUsertype(Integer.parseInt(map.get("usertype").toString()));
+			user.setUserstate(Integer.parseInt(map.get("userstate").toString()));
+			user.setUserscope(Integer.parseInt(map.get("userscope").toString()));
+			user.setCreationdate((Date)map.get("creationdate"));
+			user.setUpdateddate((Date)map.get("updateddate"));
+		}else{
+			user = null;
+		}
+		return user;
+	}
 
 }

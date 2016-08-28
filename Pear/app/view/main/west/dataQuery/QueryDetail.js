@@ -23,7 +23,7 @@ Ext.define('Pear.view.main.west.dataQuery.QueryDetail', {
         type: 'vbox',
         align: 'stretch'
     },
-    controller: 'queryDetail',
+ //   controller: 'queryDetail',
     width: '100%',
 	height : 840,
 	padding : 20,
@@ -66,16 +66,25 @@ Ext.define('Pear.view.main.west.dataQuery.QueryDetail', {
         		}, {
         	        xtype: 'button',
         	        itemId: 'showAccountDetail',
+        	        scale : 'small',
+        			glyph : 'xf002@FontAwesome',
+        			iconAlign : 'left',
         	        text: '明细查询',
                     scope: this,
                     handler: this.onShowAccountDetailClick
         	    }, '->', {
         	        xtype: 'button',
+        	        scale : 'small',
+        			glyph : 'xf02f@FontAwesome',
+        			iconAlign : 'left',
         	        text: '打印',
-   //     	        scope: this,
-        	        handler: 'onPrintClick'
+        	        scope: this,
+        	        handler: this.onShowPrinter
         	    }, {
         	        xtype: 'button',
+        	        scale: 'small',
+        	        glyph: 'xf045@FontAwesome',
+        	        iconAlign : 'left',
         	        text: '导出'
         	    }]
                 
@@ -236,7 +245,7 @@ Ext.define('Pear.view.main.west.dataQuery.QueryDetail', {
             sortable: false,
             groupable: false,
             renderer: function(value, metaData, record, rowIdx, colIdx, store, view) {
-            	return value;
+            	return Ext.util.Format.number(value,"0,000.00");
                 
             },
             dataIndex: 'balance'
@@ -261,11 +270,57 @@ Ext.define('Pear.view.main.west.dataQuery.QueryDetail', {
     	var accountTree = toolbar.down('treepicker');
     	var accountStartDate = toolbar.getComponent('startDate');
     	var accountEndDate = toolbar.getComponent('endDate');
-    	console.info("账户ID："+accountTree.getValue()+"，开始日期："+accountStartDate.getValue()+"，结束日期："+accountEndDate.getValue());
     	var accountId = accountTree.getValue();
     	var startDate = accountStartDate.getValue();
     	var endDate = accountEndDate.getValue();
     	
     	this.showAccountDetail(accountId,startDate,endDate);
+    },
+    
+    
+
+    onShowPrinter: function(){
+    	var toolbar = this.down('toolbar');
+    	var accountTree = toolbar.down('treepicker');
+    	var accountStartDate = toolbar.getComponent('startDate');
+    	var accountEndDate = toolbar.getComponent('endDate');
+    	var accountId = accountTree.getValue();
+    	var startDate = accountStartDate.getValue().toLocaleDateString();
+    	var endDate = accountEndDate.getValue().toLocaleDateString();
+    	console.info(accountStartDate.getValue().toLocaleDateString());
+    	console.info(accountEndDate.getValue().toLocaleDateString());
+    	console.info(startDate);
+    	console.info(endDate);
+    	
+    	this.onPrintClick(accountId,startDate,endDate);
+    },
+    
+    
+	onPrintClick:function(accountId,startDate,endDate){
+	    	
+    	var LODOP = Pear.config.Runtime.getLodop().getLodop();
+    	if((LODOP==null)||(typeof(LODOP.VERSION)=="undefined")){
+    		//
+    	}else{
+    		LODOP.PRINT_INIT("打印明细账");
+    		//设置横向打印
+    		LODOP.SET_PRINT_PAGESIZE(2,0,0,"A4");
+    		//横向打印的正向显示
+    		LODOP.SET_SHOW_MODE("LANDSCAPE_DEFROTATED",1);
+    		LODOP.SET_PRINT_STYLE("FontSize",14);
+ //   		LODOP.SET_PRINT_STYLE("Bold",1);
+ //   		LODOP.ADD_PRINT_TEXT(20,460,500,39,"银行存款日记账");
+ //   		LODOP.SET_PRINT_STYLE("FontSize",10);
+ //   		LODOP.ADD_PRINT_TEXT(80,80,500,20,"单位:水阁村委会");
+ //   		LODOP.ADD_PRINT_TEXT(80,500,500,20,"年度：2014年");
+ //   		LODOP.ADD_PRINT_TEXT(80,960,500,20,"货币单位:元");
+ //   		LODOP.SET_PRINT_STYLE("FontSize",18);
+    		LODOP.ADD_PRINT_TBURL(10,100,"100%","100%","HTMLAccountDetail?accountid="+accountId+"&start="+startDate+"&end="+endDate+"&userid=1");
+    		
+ //   		LODOP.ADD_PRINT_HTM("2000px","0px","800px","100px","总页号：<span tdata='pageNO'>第##页</span>/<span tdata='pageCount'>共##页</span>");
+ //           LODOP.SET_PRINT_STYLEA(0,"ItemType",1);//每页都输出
+
+    		LODOP.PREVIEW();
+    	}
     }
 });

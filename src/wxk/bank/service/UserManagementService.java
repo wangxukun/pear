@@ -44,4 +44,12 @@ public interface UserManagementService {
 	 * @throws SQLException
 	 */
 	boolean delete(int userid) throws SQLException;
+	
+	/**
+	 * 根据用户ID查找用户
+	 * @param userid
+	 * @return
+	 * @throws SQLException
+	 */
+	User find(int userid) throws SQLException;
 }

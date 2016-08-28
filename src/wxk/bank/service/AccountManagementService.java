@@ -20,4 +20,11 @@ public interface AccountManagementService {
 	 * @throws SQLException
 	 */
 	Set<Account> getAll() throws SQLException;
+	
+	/**
+	 * 取得指定ID的账户
+	 * @param accountid
+	 * @return
+	 */
+	Account getAccountByAccountid(int accountid) throws SQLException ;
 }

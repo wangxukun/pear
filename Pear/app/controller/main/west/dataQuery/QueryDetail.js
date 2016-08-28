@@ -50,8 +50,8 @@ Ext.define('Pear.controller.main.west.dataQuery.QueryDetail', {
  //   		LODOP.ADD_PRINT_TEXT(80,80,500,20,"单位:水阁村委会");
  //   		LODOP.ADD_PRINT_TEXT(80,500,500,20,"年度：2014年");
  //   		LODOP.ADD_PRINT_TEXT(80,960,500,20,"货币单位:元");
-    		LODOP.SET_PRINT_STYLE("FontSize",18);
-    		LODOP.ADD_PRINT_TBURL(20,60,"100%","100%","HTMLAccountDetail");
+ //   		LODOP.SET_PRINT_STYLE("FontSize",18);
+    		LODOP.ADD_PRINT_TBURL(20,60,"100%","100%","HTMLAccountDetail?accountid=21&year=2014&user=王旭昆");
     		LODOP.PREVIEW();
     	}
     }
