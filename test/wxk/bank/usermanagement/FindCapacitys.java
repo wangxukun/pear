@@ -3,9 +3,7 @@ package wxk.bank.usermanagement;
 import java.sql.SQLException;
 import java.util.Set;
 
-import wxk.bank.dao.factory.DAOFactory;
 import wxk.bank.entity.Account;
-import wxk.bank.entity.Capacity;
 import wxk.bank.service.factory.ServiceFactory;
 
 public class FindCapacitys {

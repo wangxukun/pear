@@ -12,7 +12,10 @@ Ext.define('Pear.Application', {
               'Pear.view.main.Main',
               'Pear.view.login.Login',
               'Pear.view.login.Dialog',
-              'Pear.store.TopCapacitys'
+              'Pear.store.TopCapacitys',
+              'Pear.controller.main.center.CenterController',
+              'Pear.config.Runtime',
+              'Pear.view.main.cmp.Print'
           ],
     stores: [
         // TODO: add global / shared stores here
@@ -29,6 +32,9 @@ Ext.define('Pear.Application', {
 		 * Ext.enableAriaPanels 设置为 false
     	 */
     	Ext.enableAriaPanels= false;
+    	
+    	//初始化打印控件对象
+    	Pear.config.Runtime.setLodop(Ext.create('Pear.view.main.cmp.Print'));
     },
     launch: function () {
         // TODO - Launch the application

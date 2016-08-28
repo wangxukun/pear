@@ -8,12 +8,13 @@ Ext.define('Pear.store.AccountTreeStore', {
 	requires: ['Pear.model.AccountTreeModel'],
 	model: 'Pear.model.AccountTreeModel',
 
-	// 根节点的参数是parentId
+	// 节点的参数是名称parentId
 	nodeParam : 'parentId',
-	// 根节点的参数值是0
-	defaultRootId : 0,
+	// 根节点发送的parentId参数值是1，这个属性有点问题
+	//defaultRootId : 1,
 	root : {
+		id: 1,	//这个参数应该动态指定
 		expanded : true,
-		text : '顶级账户'
+		text : '三岔河镇农业综合服务中心'	//这个参数应该动态指定
 	}
 });

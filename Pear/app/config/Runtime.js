@@ -6,7 +6,9 @@ Ext.define('Pear.config.Runtime', {
 	singleton: true,
 	config: {
 		//	在此定义全局变量并初始化
-		navTreeRoot : {}
+		navTreeRoot : {},
+		//  接受打印控件对象
+		lodop: null
 	},
 	constructor: function(config){
 		this.initConfig(config);

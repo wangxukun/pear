@@ -76,7 +76,9 @@ Ext.define('Pear.view.main.west.dataQuery.GeneralLedger', {
                     handler: this.onShowOfficesClick
         	    }, '->', {
         	        xtype: 'button',
-        	        text: '打印'
+        	        text: '打印',
+        	        scope: this,
+        	        handler: this.onPrintClick
         	    }, {
         	        xtype: 'button',
         	        text: '导出'
@@ -144,6 +146,19 @@ Ext.define('Pear.view.main.west.dataQuery.GeneralLedger', {
         this.down('#showOffices').enable();
         this.down('#showEmployees').disable();
         Ext.resumeLayouts(true);
+    },
+    
+    onPrintClick:function(){
+    	var LODOP = Pear.config.Runtime.getLodop().getLodop();
+    	if((LODOP==null)||(typeof(LODOP.VERSION)=="undefined")){
+    		//
+    	}else{
+    		LODOP.PRINT_INIT("打印控件功能演示_Lodop功能_表单一");
+    		LODOP.SET_PRINT_STYLE("FontSize",18);
+    		LODOP.SET_PRINT_STYLE("Bold",1);
+    		LODOP.ADD_PRINT_TEXT(50,231,260,39,"打印页面部分内容");
+    		LODOP.PREVIEW();
+    	}
     },
     
     createEmployeeStore: function(){

@@ -5,16 +5,13 @@ Ext.define('Pear.view.main.center.Center', {
 	extend: 'Ext.tab.Panel',
 	
 	xtype: 'centertab',
-	
 	requires: ['Pear.controller.main.center.CenterController'],
-	
+	controller: 'centerController',
 	id: 'tabs',
 	activeTab: 0,      // First tab active by default
     items: {
         title: '开始页',
         glyph: 'xf015@FontAwesome',
-        items: [{
-        	xtype: 'queryDetail'
-        }]
+        html: '开始'
     }
 });
