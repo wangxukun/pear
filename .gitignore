@@ -3,3 +3,6 @@ build/
 .sencha/
 Pear/ext/
 Pear/build/
+.classpath
+Pear/bootstrap.json
+Pear/sass/example/bootstrap.json
