@@ -1,12 +1,10 @@
 /**
  * Created by Administrator on 10/1/2016.
  */
-Ext.define('Pear.view.main.west.dataQuery.QueryDetail', {
+Ext.define('Pear.view.main.west.dataQuery.GeneralLedger', {
 	extend : 'Ext.grid.Panel',
 
-	requires : [ 'Ext.ux.TreePicker', 'Pear.store.AccountTreeStore' ],
-
-	xtype : 'queryDetail',
+	xtype : 'generalLedger',
 	layout : 'fit',
 	ui : 'highlight-framed',
 	border : true,
@@ -17,21 +15,9 @@ Ext.define('Pear.view.main.west.dataQuery.QueryDetail', {
 	enableColumnHide : false, // 不能隐藏列
 	initComponent : function() {
 		this.header = {
-			title: '<center>三岔河镇农业综合服务中心</center>'
+			title: '三岔河镇农业综合服务中心'
 		};
 		this.tbar = [ {
-			xtype : 'treepicker',
-//			id : 'accountTree',
-			name : 'parentid',
-			fieldLabel : '查询账户',
-			width : 300,
-			labelWidth : 60,
-			displayField : 'text',
-			emptyText : '请选择要查询的账户',
-			allowBlank : false,
-			blankText : '不能是空',
-			store : Ext.create('Pear.store.AccountTreeStore')
-		}, {
 			xtype : 'datefield',
 			fieldLabel : '起止日期',
 			width : 250,
@@ -71,6 +57,10 @@ Ext.define('Pear.view.main.west.dataQuery.QueryDetail', {
 			text : '<center>编号</center>',
 			dataIndex : 'number',
 			width : 80
+		}, {
+			text : '<center>所属账户</center>',
+			dataIndex : 'accountname',
+			width: 300
 		}, {
 			text : '<center>摘要</center>',
 			dataIndex : 'summary',

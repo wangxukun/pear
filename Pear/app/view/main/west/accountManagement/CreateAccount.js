@@ -49,7 +49,7 @@ Ext.define('Pear.view.main.west.accountManagement.CreateAccount', {
         }
     },{
     	xtype: 'treepicker',
-    	id: 'accountTree',
+  //  	id: 'accountTree',
     	name: 'parentid',
     	fieldLabel: '上级账户',
     	displayField: 'text',

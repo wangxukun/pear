@@ -6,7 +6,8 @@ Ext.define('Pear.view.main.west.accountManagement.InitAccount', {
     xtype: 'initAccount',
     
     requires: [
-    ],
+ 	   'Pear.store.AccountTreeStore'
+ 	],
     //应用一个框架到这个panel
     frame: true,
     //框架标题
@@ -46,10 +47,11 @@ Ext.define('Pear.view.main.west.accountManagement.InitAccount', {
             	//这个子组件为Ext.grid.Panel组件
                 xtype: 'treepanel',
                 scrollable: true,
-                rootVisible: false,
+      //          rootVisible: false,
+                displayField : 'text',
                 width: 150,
                 height: 320,
-                store: Ext.create('Pear.store.AccountTreeStore'),
+                store: Ext.create('Pear.store.AccountTreeStore')
             }, {
                 columnWidth: 0.55,
                 margin: '0 0 0 10',
@@ -62,9 +64,7 @@ Ext.define('Pear.view.main.west.accountManagement.InitAccount', {
                 	//表单的标签左对齐
                 	labelAlign: 'left',
                 	//在整个表单中标签列所占的宽度
-                	labelWidth: 80,
-                	//错误提示信息显示的位置
-                	msgTarget: 'under'
+                	labelWidth: 80
                 },
                 items: [{
                     fieldLabel: '账户名',

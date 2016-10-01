@@ -16,7 +16,8 @@ Ext.define('Pear.controller.main.west.TreeListController', {
 	    'Pear.view.main.west.userManagement.DelmodUser',
 	    'Pear.view.main.west.accountManagement.InitAccount',
 	    'Pear.view.main.west.dataQuery.QueryDetail',
-	    'Pear.view.main.west.dataProcessing.InputData'
+	    'Pear.view.main.west.dataProcessing.InputData',
+	    'Pear.view.main.west.dataQuery.GeneralLedger'
     ],
 
     init: function(){

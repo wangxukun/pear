@@ -35,9 +35,15 @@ public class JsonAccountTree extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
 		PrintWriter out = response.getWriter();
-		
 		String parentId = request.getParameter("parentId");
-		int parentid = Integer.parseInt(parentId);
+		System.out.println(parentId.length());
+		int parentid;
+		//当传递来的参数是一个很大的字符串时，可以说明不是一个数字字符串，而是ExtJS设置的AccountTreeModel-[1、2...]
+		if(parentId.length() > 15){
+			parentid = 1;
+		}else{
+			parentid = Integer.parseInt(parentId);
+		}
 		JSONObject jo = null;
 		jo = JsonFactory.getJsonAccountManageInstaqnce().getAccountTree(parentid);
 		out.print(jo);

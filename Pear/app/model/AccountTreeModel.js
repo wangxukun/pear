@@ -6,10 +6,10 @@ Ext.define('Pear.model.AccountTreeModel', {
 	
 	// 对应account表中accountid字段
 	idProperty : 'id',
-	identifier : {
+	/*identifier : {
 		type : 'sequential',
 		seed : 0
-	},
+	},*/
 	// 属性域
 	fields : [
 	{
