@@ -13,7 +13,8 @@ Ext.define('Pear.view.main.center.Center', {
     items: {
         title: '开始页',
         glyph: 'xf015@FontAwesome',
-        html: '各单位银行账户余额'//,
-    //    items: Ext.create('Pear.view.main.cmp.DynamicButtonText')
+        items: [{
+        	xtype: 'queryDetail'
+        }]
     }
 });
